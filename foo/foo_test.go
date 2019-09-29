@@ -1,7 +1,7 @@
-package mocktestapp_test
+package foo_test
 
 import (
-	mta "mocktestapp"
+	"mocktestapp/foo"
 	"testing"
 
 	"github.com/stretchr/testify/mock"
@@ -14,16 +14,16 @@ func BarMock() {
 }
 
 func TestMain(t *testing.T) {
-	mta.Mock(&mta.MockHandler{
+	foo.Mock(&foo.MockHandler{
 		Bar: BarMock,
 	})
 
 	m.On("BarMock").Times(2).Return()
 
-	mta.Foo()
-	mta.Foo()
+	foo.Foo()
+	foo.Foo()
 
 	m.AssertExpectations(t)
 
-	mta.Mock(&mta.MockHandler{})
+	foo.Mock(&foo.MockHandler{})
 }
